@@ -20,7 +20,7 @@ public class StudentModel {
             return instance;
         }else {
             conn = DB.getConnection();
-            conn.createStatement().execute("create table if not exists student (id smallint auto_increment,name varchar(50),age smallint,primary key(id));");
+            conn.createStatement().execute("create table if not exists student (id smallint auto_increment,name varchar(50),DOB varchar(50),batch smallint,primary key(id));");
             instance = new StudentModel();
             return instance;
         }
