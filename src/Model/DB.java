@@ -10,8 +10,8 @@ import java.sql.SQLException;
 public class DB {
     private static Connection conn=null;
     private static String url = "jdbc:mariadb://10.10.11.209:5674/test_db";
-    public static String user = "tsuyoshi";
-    public static String password = "0809";
+    private static String user = "tsuyoshi";
+    private static String password = "0809";
     private DB() {}
 
     public static Connection getConnection() throws SQLException{
