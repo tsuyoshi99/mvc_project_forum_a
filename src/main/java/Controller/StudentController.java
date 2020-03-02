@@ -18,7 +18,11 @@ import java.util.LinkedList;
 
 @WebServlet("/studentController/*")
 public class StudentController extends HttpServlet {
-    Student student = null;
+    /**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	Student student = null;
     StudentModel studentModel = null;
     Gson gson = null;
 
