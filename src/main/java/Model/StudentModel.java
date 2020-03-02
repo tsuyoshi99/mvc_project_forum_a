@@ -1,5 +1,6 @@
 package Model;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +67,7 @@ public class StudentModel {
     }
 
     public int update(final Student student) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("update student set name=?,DOB=?,batch=? where id=?");
+        PreparedStatement ps = conn.prepareStatement("update student set name=?,DOB=?,batch=? where id=?;");
         ps.setString(1, student.getName());
         ps.setString(2, student.getDOB());
         ps.setInt(3,student.getBatch());

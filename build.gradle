@@ -1,0 +1,20 @@
+plugins {
+    id 'war'
+    id "org.gretty" version "3.0.1"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+}
+
+gretty {
+  debugPort = 5005      // default
+  debugSuspend = true   // default
+}

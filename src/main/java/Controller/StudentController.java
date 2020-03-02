@@ -2,9 +2,8 @@ package Controller;
 
 import Model.Student;
 import Model.StudentModel;
-import com.google.gson.Gson;
-
-import javax.servlet.RequestDispatcher;
+import com.google.gson.Gson; 
+import com.google.gson.GsonBuilder;  
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
+
 
 @WebServlet("/studentController/*")
 public class StudentController extends HttpServlet {
@@ -28,11 +27,14 @@ public class StudentController extends HttpServlet {
     public StudentController() throws SQLException {
         //static method
         studentModel = StudentModel.getStudentModel();
+        GsonBuilder builder = new GsonBuilder(); 
+        builder.setPrettyPrinting(); 
+        this.gson = builder.create();
     }
 
     private void sendAsJson(HttpServletResponse response, Object obj) throws IOException{
         response.setContentType("application/json");
-        String res = gson.toJson(obj);
+        String res = gson.toJson(obj);        
 
         PrintWriter out = response.getWriter();
         out.print(res);
