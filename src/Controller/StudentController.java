@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 @WebServlet("/studentController/*")
@@ -46,9 +47,14 @@ public class StudentController extends HttpServlet {
         student = null;
         String pathInfo = req.getPathInfo();
 
-        //if URL pattern didn't match
+        //send list of all record
         if(pathInfo == null || pathInfo.equals("/")){
-            sendAsJson(resp, student);
+            try {
+                LinkedList<Student> students = getListStudent(req,resp);
+                sendAsJson(resp, students);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             return;
         }
 
@@ -116,7 +122,7 @@ public class StudentController extends HttpServlet {
         String pathInfo = req.getPathInfo();
 
         if(pathInfo == null || pathInfo.equals("/")){
-            sendAsJson(resp, student);
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
@@ -214,19 +220,11 @@ public class StudentController extends HttpServlet {
         return student;
     }
 
-    /*public void getListStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    public LinkedList<Student> getListStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         //fetch all record and store as list
-        List<Student> studentsList = studentModel.get();
-        request.setAttribute("list", studentsList);
-
-        //convert to JSON
-        Gson gson = new Gson();
-        String json = gson.toJson(studentsList);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        //handle the JSON text here
-    }*/
+        LinkedList<Student> studentsList = studentModel.get();
+        return studentsList;
+    }
 
     public String checkStudent(HttpServletRequest request, HttpServletResponse response, int id) throws ServletException, IOException, SQLException {
         //get Id from input
